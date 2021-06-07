@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EventBus</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">event_bus</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EventBus (event_bus)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventBus</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30%
+  </span>
+  <span class="absValue">
+    (3/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (9/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package event_bus;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;public class EventBus implements Bus {
+<b class="fc"><i>4</i>&nbsp;    private final Registry registry = new Registry();</b>
+<i>5</i>&nbsp;    private String busName;
+<i>6</i>&nbsp;    private final static String DEFUALT_BUS_NAME = &quot;default&quot;;
+<i>7</i>&nbsp;    private final static String DEFUALT_TOPIC = &quot;default-topic&quot;;
+<i>8</i>&nbsp;    private final Dispatcher dispatcher;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    public EventBus() {
+<b class="fc"><i>11</i>&nbsp;        this(DEFUALT_BUS_NAME, null, Dispatcher.SEQ_EZCUTOR_SERVICE);</b>
+<b class="fc"><i>12</i>&nbsp;    }</b>
+<i>13</i>&nbsp;
+<b class="fc"><i>14</i>&nbsp;    EventBus(String busName, EventExceptionHandler exceptionHandler, Excecutor excecutor) {</b>
+<b class="fc"><i>15</i>&nbsp;        this.busName = busName;</b>
+<b class="fc"><i>16</i>&nbsp;        this.dispatcher = Dispatcher.newDispatcher(exceptionHandler, excecutor);</b>
+<b class="fc"><i>17</i>&nbsp;    }</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public EventBus(String busName) {
+<b class="nc"><i>20</i>&nbsp;        this(busName, null, Dispatcher.SEQ_EZCUTOR_SERVICE);</b>
+<b class="nc"><i>21</i>&nbsp;    }</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public EventBus(EventExceptionHandler exceptionHandler) {
+<b class="nc"><i>24</i>&nbsp;        this(DEFUALT_BUS_NAME, exceptionHandler, Dispatcher.SEQ_EZCUTOR_SERVICE);</b>
+<b class="nc"><i>25</i>&nbsp;    }</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    @Override
+<i>28</i>&nbsp;    public void register(Object subscriber) {
+<b class="fc"><i>29</i>&nbsp;        this.registry.bind(subscriber);</b>
+<b class="fc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    @Override
+<i>33</i>&nbsp;    public void unregister(Object subscriber) {
+<i>34</i>&nbsp;
+<b class="nc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    @Override
+<i>38</i>&nbsp;    public void post(Object event) {
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;    }</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    @Override
+<i>43</i>&nbsp;    public void post(Object Event, String topic) {
+<i>44</i>&nbsp;
+<b class="nc"><i>45</i>&nbsp;    }</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    @Override
+<i>48</i>&nbsp;    public void close() {
+<i>49</i>&nbsp;
+<b class="nc"><i>50</i>&nbsp;    }</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    @Override
+<i>53</i>&nbsp;    public String getBusName() {
+<b class="nc"><i>54</i>&nbsp;        return null;</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-06-07 20:33</div>
+</div>
+</body>
+</html>
