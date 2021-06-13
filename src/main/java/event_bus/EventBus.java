@@ -13,7 +13,7 @@ public class EventBus implements Bus {
         this(DEFUALT_BUS_NAME, null, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
-    EventBus(String busName, Dispatcher.EventExceptionHandler exceptionHandler, Executor excecutor) {
+    EventBus(String busName, EventExceptionHandler exceptionHandler, Executor excecutor) {
         this.busName = busName;
         this.dispatcher = Dispatcher.newDispatcher(exceptionHandler, excecutor);
     }
@@ -22,7 +22,7 @@ public class EventBus implements Bus {
         this(busName, null, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
-    public EventBus(Dispatcher.EventExceptionHandler exceptionHandler) {
+    public EventBus(EventExceptionHandler exceptionHandler) {
         this(DEFUALT_BUS_NAME, exceptionHandler, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 

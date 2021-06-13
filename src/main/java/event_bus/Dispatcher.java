@@ -105,9 +105,4 @@ public class Dispatcher {
         }
     }
 
-    public static class EventExceptionHandler {
-
-        public void handle(Exception e, BaseEventContext baseEventContext) {
-        }
-    }
 }

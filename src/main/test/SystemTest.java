@@ -33,7 +33,7 @@ public class SystemTest {
         }
     }
 
-    private static class SimpleObject1 {
+    public static class SimpleObject1 {
         @Subscribe
         public void methodFirstObjectFirst(String a) {
             System.out.println("----------1-1------: " + a);
@@ -45,7 +45,7 @@ public class SystemTest {
         }
     }
 
-    private static class SimpleObject2 {
+    public static class SimpleObject2 {
         @Subscribe
         public void methodFirstObjectSec(String a) {
             System.out.println("2-1: " + a);
