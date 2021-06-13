@@ -8,7 +8,7 @@ public class EventDispatcherExample {
         eventDispatcher.dispatch(new InputEvent(1, 2));
     }
 
-    private static class InputEvent extends Event {
+    public static class InputEvent extends Event {
         private final int x;
         private final int y;
 
@@ -26,7 +26,7 @@ public class EventDispatcherExample {
         }
     }
 
-    static class ResultEvent extends Event {
+    public static class ResultEvent extends Event {
         private final int result;
 
         public ResultEvent(int result) {

@@ -27,7 +27,7 @@ public class EventDispatcher implements DynamicRouter {
     }
 
     // 运行时异常，不是必须在方法上继续抛出
-    public class MessageMatchException extends RuntimeException {
+    public static class MessageMatchException extends RuntimeException {
         public MessageMatchException(String s) {
             super(s);
         }
