@@ -18,7 +18,6 @@ public class Dispatcher {
         this.excecutorService = executor;
     }
 
-
     public static Dispatcher newDispatcher(EventExceptionHandler exceptionHandler, Executor excecutor) {
         return new Dispatcher(exceptionHandler, excecutor);
     }

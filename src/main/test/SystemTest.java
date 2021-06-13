@@ -23,36 +23,38 @@ public class SystemTest {
             Bus bus = new AsyncEventBus("TestBus", Executors.newFixedThreadPool(10));
             bus.register(new SimpleObject1());
             bus.register(new SimpleObject2());
+
             for (int i = 0; i < 10; i++) {
-                bus.post("hello");
+                // 给默认的topic发送
+                bus.post(i);
             }
             System.out.println("================================");
             for (int i = 0; i < 10; i++) {
-                bus.post("hello", "first");
+                bus.post(i, "first");
             }
         }
     }
 
     public static class SimpleObject1 {
         @Subscribe
-        public void methodFirstObjectFirst(String a) {
+        public void methodFirstObjectFirst(Object a) {
             System.out.println("----------1-1------: " + a);
         }
 
         @Subscribe(topic = "first")
-        public void methodSecObjectFirst(String a) {
+        public void methodSecObjectFirst(Object a) {
             System.out.println("1-2: " + a);
         }
     }
 
     public static class SimpleObject2 {
         @Subscribe
-        public void methodFirstObjectSec(String a) {
+        public void methodFirstObjectSec(Object a) {
             System.out.println("2-1: " + a);
         }
 
         @Subscribe(topic = "sec")
-        public void methodSecObjectSec(String a) {
+        public void methodSecObjectSec(Object a) {
             System.out.println("2-2: " + a);
         }
     }

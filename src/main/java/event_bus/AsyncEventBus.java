@@ -1,41 +1,25 @@
 package event_bus;
 
-import event_bus.Bus;
 
 import java.util.concurrent.ExecutorService;
 
-public class AsyncEventBus implements Bus {
-    public AsyncEventBus(String testBus, ExecutorService newFixedThreadPool) {
+public class AsyncEventBus extends EventBus {
+    private static final String DEFAULT_ASYNC_NAME = "default_async_bus";
 
+    public AsyncEventBus(String busName, ExecutorService executorService) {
+        this(busName, null, executorService);
     }
 
-    @Override
-    public void register(Object subscriber) {
-
+    public AsyncEventBus(String busName, EventExceptionHandler eventExceptionHandler, ExecutorService executorService) {
+        super(DEFAULT_ASYNC_NAME, eventExceptionHandler, executorService);
     }
 
-    @Override
-    public void unregister(Object subscriber) {
-
+    public AsyncEventBus(ExecutorService executorService) {
+        this(DEFAULT_ASYNC_NAME, null, executorService);
     }
 
-    @Override
-    public void post(Object event) {
-
+    public AsyncEventBus(ExecutorService executorService, EventExceptionHandler eventExceptionHandler) {
+        this(DEFAULT_ASYNC_NAME, eventExceptionHandler, executorService);
     }
 
-    @Override
-    public void post(Object Event, String topic) {
-
-    }
-
-    @Override
-    public void close() {
-
-    }
-
-    @Override
-    public String getBusName() {
-        return null;
-    }
 }

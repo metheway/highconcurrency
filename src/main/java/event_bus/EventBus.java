@@ -4,7 +4,7 @@ import java.util.concurrent.Executor;
 
 public class EventBus implements Bus {
     private final Registry registry = new Registry();
-    private String busName;
+    private final String busName;
     private final static String DEFUALT_BUS_NAME = "default";
     private final static String DEFUALT_TOPIC = "default-topic";
     private final Dispatcher dispatcher;
@@ -57,7 +57,6 @@ public class EventBus implements Bus {
     public String getBusName() {
         return null;
     }
-
 
 
 }
