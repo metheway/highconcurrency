@@ -2,8 +2,8 @@ package active_object;
 
 import java.util.concurrent.Future;
 
-public class OrderService {
-    public Future<String> findOrderDetails(int order) {
-        return null;
-    }
+public interface OrderService {
+    public Future<String> findOrderDetails(long order);
+
+    void order(String account, long orderId);
 }
