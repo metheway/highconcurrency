@@ -38,6 +38,7 @@ public class EventBus implements Bus {
 
     @Override
     public void post(Object event) {
+        // 封装Event，然后发送到Registry里面的topic里面的Subscirber
 
     }
 

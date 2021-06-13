@@ -7,7 +7,7 @@ public class Dispatcher {
     private final Executor excecutorService;
     private final EventExceptionHandler eventExceptionHandler;
 
-    // 特定的一个线程池
+    // 特定的一个线程
     public static final Executor SEQ_EXECUTOR_SERVICE = SeqExecutorService.INSTANCE;
     public static final Executor PRE_EXECUTOR_SERVICE = PreExecutorService.INSTANCE;
 
