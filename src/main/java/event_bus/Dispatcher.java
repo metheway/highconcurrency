@@ -1,6 +1,5 @@
 package event_bus;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executor;
@@ -21,7 +20,7 @@ public class Dispatcher {
 
 
     public static Dispatcher newDispatcher(EventExceptionHandler exceptionHandler, Executor excecutor) {
-        return null;
+        return new Dispatcher(exceptionHandler, excecutor);
     }
 
     public void dispatch(EventBus eventBus, Registry registry, Object event, String topic) {
@@ -32,7 +31,7 @@ public class Dispatcher {
                 filter(subscriber -> {
                     Method method = subscriber.getSubscribeMethod();
                     Class<?> clazz = method.getParameterTypes()[0];
-                    // 获取类型，判断方法是否是event的父类
+                    // 获取参数类型，判断方法是否是event的父类或一样的类
                     return (clazz.isAssignableFrom(event.getClass()));
                 }).
                 forEach(subscriber -> realInvokeSubscribe(subscriber, event, eventBus));
@@ -45,6 +44,7 @@ public class Dispatcher {
             try {
                 method.invoke(subscriberObject, event);
             } catch (Exception e) {
+                System.out.println("e: " + e);
                 if (null != eventExceptionHandler) {
                     eventExceptionHandler.handle(e, new BaseEventContext(
                             eventBus.getBusName(), subscriber, event
@@ -72,4 +72,42 @@ public class Dispatcher {
         }
     }
 
+    private static class BaseEventContext implements EventContext {
+
+        private final String eventBusName;
+        private final Subscriber subscriber;
+        private final Object event;
+
+        public BaseEventContext(String busName, Object subscriber, Object event) {
+            this.eventBusName = busName;
+            this.subscriber = (Subscriber) subscriber;
+            this.event = event;
+        }
+
+        @Override
+        public String getEventBusName() {
+            return eventBusName;
+        }
+
+        @Override
+        public Subscriber getSubscriber() {
+            return subscriber;
+        }
+
+        @Override
+        public Method getSubscribe() {
+            return subscriber != null ? subscriber.getSubscribeMethod() : null;
+        }
+
+        @Override
+        public Object getEvent() {
+            return event;
+        }
+    }
+
+    public static class EventExceptionHandler {
+
+        public void handle(Exception e, BaseEventContext baseEventContext) {
+        }
+    }
 }

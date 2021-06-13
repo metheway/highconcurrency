@@ -1,6 +1,5 @@
 package event_bus;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executor;
 
 public class EventBus implements Bus {
@@ -14,7 +13,7 @@ public class EventBus implements Bus {
         this(DEFUALT_BUS_NAME, null, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
-    EventBus(String busName, EventExceptionHandler exceptionHandler, Executor excecutor) {
+    EventBus(String busName, Dispatcher.EventExceptionHandler exceptionHandler, Executor excecutor) {
         this.busName = busName;
         this.dispatcher = Dispatcher.newDispatcher(exceptionHandler, excecutor);
     }
@@ -23,7 +22,7 @@ public class EventBus implements Bus {
         this(busName, null, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
-    public EventBus(EventExceptionHandler exceptionHandler) {
+    public EventBus(Dispatcher.EventExceptionHandler exceptionHandler) {
         this(DEFUALT_BUS_NAME, exceptionHandler, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 

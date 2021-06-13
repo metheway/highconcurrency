@@ -17,6 +17,7 @@ public class SystemTest {
             bus.post("hello", "first");
         }
     }
+
     static class AsyncTest {
         public static void main(String[] args) {
             Bus bus = new AsyncEventBus("TestBus", Executors.newFixedThreadPool(10));
@@ -34,25 +35,25 @@ public class SystemTest {
 
     private static class SimpleObject1 {
         @Subscribe
-        public void methodFirstObjectFirst() {
-            System.out.println("-------methodFirstObjectFirst---1-1------");
+        public void methodFirstObjectFirst(String a) {
+            System.out.println("----------1-1------: " + a);
         }
 
         @Subscribe(topic = "first")
-        public void methodSecObjectFirst() {
-            System.out.println("methodSecObjectFirst: 1-2");
+        public void methodSecObjectFirst(String a) {
+            System.out.println("1-2: " + a);
         }
     }
 
     private static class SimpleObject2 {
         @Subscribe
-        public void methodFirstObjectSec() {
-            System.out.println("2-1");
+        public void methodFirstObjectSec(String a) {
+            System.out.println("2-1: " + a);
         }
 
         @Subscribe(topic = "sec")
-        public void methodSecObjectSec() {
-            System.out.println("2-2");
+        public void methodSecObjectSec(String a) {
+            System.out.println("2-2: " + a);
         }
     }
 }

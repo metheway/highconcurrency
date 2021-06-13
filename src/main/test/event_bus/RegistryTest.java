@@ -49,6 +49,7 @@ public class RegistryTest {
             System.out.println("secMethod" + i);
         }
 
+        @Subscribe
         public void thridMethod() {
             System.out.println("thirdMethod");
         }
@@ -106,5 +107,6 @@ public class RegistryTest {
         for (int i = 0; i < caseMethods.length; i++) {
             assert (methodList.contains(caseMethods[i]));
         }
+        assert (methodList.size() > 0);
     }
 }
