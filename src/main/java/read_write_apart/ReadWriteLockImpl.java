@@ -6,7 +6,6 @@ public class ReadWriteLockImpl implements ReadWriteLock {
     private int writingWriters = 0;
     private int waitingWriters = 0;
     private int readingReaders = 0;
-    private int waitingReaders = 0;
 
     public ReadWriteLockImpl(boolean preferWrite) {
         this.preferWrite = preferWrite;
@@ -50,14 +49,6 @@ public class ReadWriteLockImpl implements ReadWriteLock {
 
     void decrementWaitingWriters() {
         this.waitingWriters--;
-    }
-
-    void incrementWaitingReaders() {
-        this.waitingReaders++;
-    }
-
-    void decrementWaitingReaders() {
-        this.waitingReaders--;
     }
 
     void incrementReadingReaders() {
