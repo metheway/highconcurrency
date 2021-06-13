@@ -1,5 +1,6 @@
 package event_bus;
 
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executor;
 
 public class EventBus implements Bus {
@@ -38,13 +39,14 @@ public class EventBus implements Bus {
 
     @Override
     public void post(Object event) {
-        // 封装Event，然后发送到Registry里面的topic里面的Subscirber
-
+        // 默认的topic发给这些Subscriber
+        // 取出所有的subscriber
+        this.post(event, DEFUALT_TOPIC);
     }
 
     @Override
-    public void post(Object Event, String topic) {
-
+    public void post(Object event, String topic) {
+        this.dispatcher.dispatch(this, registry, event, topic);
     }
 
     @Override

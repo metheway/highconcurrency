@@ -59,4 +59,8 @@ public class Registry {
     public void clear() {
         this.subscriberContainer.clear();
     }
+
+    public ConcurrentLinkedQueue<Subscriber> scanSubscriber(final String topic) {
+        return subscriberContainer.get(topic);
+    }
 }
