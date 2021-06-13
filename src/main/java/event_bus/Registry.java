@@ -13,16 +13,24 @@ public class Registry {
     private final ConcurrentHashMap<String, ConcurrentLinkedQueue<Subscriber>> subscriberContainer =
             new ConcurrentHashMap<>();
 
-    // 队列主要保证顺序，并发性
+    // 队列主要保证顺序，并发性，将有注解存入
     public void bind(Object subscriber) {
         List<Method> subscriberMethods = getSubscriberMethod(subscriber);
         subscriberMethods.forEach(m -> tierSubscriber(subscriber, m));
     }
 
+    // 将对应的subscriber和method建立联系，放入对应的topic里面
     private void tierSubscriber(Object subscriber, Method method) {
-        subscriberContainer.put("default-topic", new ConcurrentLinkedQueue<>());
+        // <topic, queue>, queue -> (subscriber, method)
+        final Subscribe subscribe = method.getDeclaredAnnotation(Subscribe.class);
+        String topic = subscribe.topic();
+        // hashmap容器判断是否存在，如果存在则实例化一个quueu
+        subscriberContainer.computeIfAbsent(topic, key -> new ConcurrentLinkedQueue<>());
+        // 创建一个Subsriber并且加入Subscriber列表中(为什么不直接加入Subscriber对象呢，新实例化一个Subscriber）
+        subscriberContainer.get(topic).add(new Subscriber(subscriber, method));
     }
 
+    // 获取提交者的有注解的方法
     private List<Method> getSubscriberMethod(Object subscriber) {
         final List<Method> methods = new ArrayList<>();
         Class<?> tmpClass = subscriber.getClass();
@@ -35,6 +43,17 @@ public class Registry {
             tmpClass = tmpClass.getSuperclass();
         }
         return methods;
+    }
+
+    public void unbind(Object subscriber) {
+        // 解绑只是设置非法，而非删掉，有待改进
+        subscriberContainer.forEach((key, queue) -> {
+            queue.forEach(s -> {
+                if (s.getSubscribeObject() == subscriber) {
+                    s.setDisable(true);
+                }
+            });
+        });
     }
 
     public void clear() {

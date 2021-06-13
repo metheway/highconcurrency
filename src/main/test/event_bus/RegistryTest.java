@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RegistryTest {
 
@@ -68,6 +66,11 @@ public class RegistryTest {
         Object sizeResult = sizeOfHashMap.invoke(subscriberContainer);
 
         System.out.println(sizeResult);
+    }
+
+    @Test
+    public void testUnbind() {
+
     }
 
     @Test

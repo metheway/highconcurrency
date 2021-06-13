@@ -8,20 +8,20 @@ public class EventBus implements Bus {
     private final Dispatcher dispatcher;
 
     public EventBus() {
-        this(DEFUALT_BUS_NAME, null, Dispatcher.SEQ_EZCUTOR_SERVICE);
+        this(DEFUALT_BUS_NAME, null, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
-    EventBus(String busName, EventExceptionHandler exceptionHandler, Excecutor excecutor) {
+    EventBus(String busName, EventExceptionHandler exceptionHandler, Executor excecutor) {
         this.busName = busName;
         this.dispatcher = Dispatcher.newDispatcher(exceptionHandler, excecutor);
     }
 
     public EventBus(String busName) {
-        this(busName, null, Dispatcher.SEQ_EZCUTOR_SERVICE);
+        this(busName, null, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
     public EventBus(EventExceptionHandler exceptionHandler) {
-        this(DEFUALT_BUS_NAME, exceptionHandler, Dispatcher.SEQ_EZCUTOR_SERVICE);
+        this(DEFUALT_BUS_NAME, exceptionHandler, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
     @Override
