@@ -1,3 +1,5 @@
+package event_bus;
+
 import event_bus.AsyncEventBus;
 import event_bus.Bus;
 import event_bus.EventBus;
