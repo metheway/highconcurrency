@@ -1,5 +1,7 @@
 package event_bus;
 
+import java.util.concurrent.Executor;
+
 public class EventBus implements Bus {
     private final Registry registry = new Registry();
     private String busName;

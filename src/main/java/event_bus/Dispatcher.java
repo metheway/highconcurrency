@@ -1,5 +1,7 @@
 package event_bus;
 
+import java.util.concurrent.Executor;
+
 // 将event推送给每个topic的subscriber上面
 public class Dispatcher {
     private final Executor excecutorService;
@@ -36,4 +38,5 @@ public class Dispatcher {
             command.run();
         }
     }
+
 }
